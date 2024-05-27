@@ -54,9 +54,8 @@ class Map:
         
         #startscreen
         self.startScreen_group = pygame.sprite.Group()
-        exit_gate = Spriteee(-200, 50, 'assets/sprites/door.JPG', type="doorTest")
+        exit_gate = Spriteee(800, 50, 'assets/sprites/door.JPG', type="doorTest")
         self.startScreen_group.add(exit_gate)
-
         #map1
         self.map1 = pygame.sprite.Group()
         guard = Spriteee(830, 30, 'assets/sprites/guard.png', type="guard")
@@ -70,13 +69,13 @@ class Map:
         door0 = Spriteee(3400, 70, 'assets/sprites/door.png', type="door0")
         self.map1.add(door0)
         #ilker
-        ilker = Spriteee(2300, 820, 'assets/sprites/ilker.png', type="ilker")
+        ilker = Spriteee(2300, 785, 'assets/sprites/ilker.png', type="ilker")
         self.map1.add(ilker)
         #classroom
-        classroom = Spriteee(1000, 805, 'assets/sprites/classroom.PNG', type="classroom")
+        classroom = Spriteee(1000, 730, 'assets/sprites/classroom.PNG', type="classroom")
         self.map1.add(classroom)
         #Student
-        student = Spriteee(500, 715, 'assets/sprites/students.PNG', type="student")
+        student = Spriteee(500, 800, 'assets/sprites/students.PNG', type="student")
         self.map1.add(student)
         #door1
         door1 = Spriteee(3400, 830, 'assets/sprites/door.png', type="door1")
@@ -95,6 +94,9 @@ class Map:
         #book
         book = Spriteee(100, 3532, 'assets/sprites/bok.png', type="book")
         self.map1.add(book)
+        #koridor
+        koridor = Spriteee(300, 2700, 'assets/sprites/koridor.png', type="koridor")
+        self.map1.add(koridor)
         #library
         library = Spriteee(2250, 2695, 'assets/sprites/kütüphane.png', type="ilber")
         self.map1.add(library)
@@ -108,10 +110,10 @@ class Map:
         erhan = Spriteee(514, 4365, 'assets/sprites/erhan.png', type="erhan")
         self.map1.add(erhan)
         #rektor
-        rektor = Spriteee(2000, 4370, 'assets/sprites/rektor.png', type="rektor")
+        rektor = Spriteee(2000, 4372, 'assets/sprites/rektor.png', type="rektor")
         self.map1.add(rektor)
         #hapis
-        hapis = Spriteee(2500, 4352, 'assets/sprites/hapis.png', type="hapis")
+        hapis = Spriteee(2250, 4350, 'assets/sprites/hapis.png', type="hapis")
         self.map1.add(hapis)
         
         self.map_rects: List[pygame.Rect] = []
@@ -187,7 +189,8 @@ class Map:
         if self.map1_rect:
             pygame.draw.rect(self.surface, (255, 0, 0), self.map1_rect.move(-scroll))
 
-        if game.current_map == game.maps[0]:
+        if game.current_map == game.maps[1]:
+            self.map1.empty()
             for exit_gate in self.startScreen_group.sprites():
                 exit_rect = exit_gate.rect.move(-scroll)
                 self.surface.blit(exit_gate.scaled_image, exit_rect)
@@ -199,3 +202,4 @@ class Map:
         else:
             # Clear the exit_group for other maps
             self.startScreen_group.empty()
+            self.map1.empty()
